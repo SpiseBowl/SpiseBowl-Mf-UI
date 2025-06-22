@@ -1,31 +1,59 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
+// 🎨 Color Constants
+const COLORS = {
+  PRIMARY: "#FF6B35",
+  SECONDARY: "#354aff",
+  ERROR: "#E63946",
+  WARNING: "#FFB703",
+  SUCCESS: "#4CAF50",
+  INFO: "#2196F3",
+
+  LIGHT_BG: "#f7f7f7",
+  LIGHT_PAPER: "#FFFFFF",
+  LIGHT_TEXT_PRIMARY: "#212529",
+  LIGHT_TEXT_SECONDARY: "#6C757D",
+  LIGHT_DIVIDER: "#E0E0E0",
+
+  DARK_BG: "#121212",
+  DARK_PAPER: "#1E1E1E",
+  DARK_TEXT_PRIMARY: "#E0E0E0",
+  DARK_TEXT_SECONDARY: "#A0A0A0",
+  DARK_DIVIDER: "#333333",
+};
+
 export const getTheme = (mode) => {
   let theme = createTheme({
     palette: {
       mode,
-      primary: { main: "#FF6B35", contrastText: "#ffffff" },
-      secondary: { main: "#3A86FF", contrastText: "#ffffff" },
-      error: { main: "#E63946", contrastText: "#ffffff" },
-      warning: { main: "#FFB703", contrastText: "#ffffff" },
-      success: { main: "#4CAF50", contrastText: "#ffffff" },
-      info: { main: "#2196F3", contrastText: "#ffffff" },
+      primary: { main: COLORS.PRIMARY, contrastText: "#ffffff" },
+      secondary: { main: COLORS.SECONDARY, contrastText: "#ffffff" },
+      error: { main: COLORS.ERROR, contrastText: "#ffffff" },
+      warning: { main: COLORS.WARNING, contrastText: "#ffffff" },
+      success: { main: COLORS.SUCCESS, contrastText: "#ffffff" },
+      info: { main: COLORS.INFO, contrastText: "#ffffff" },
 
       ...(mode === "light"
         ? {
-            background: { default: "#F8F9FA", paper: "#FFFFFF" },
-            text: { primary: "#212529", secondary: "#6C757D" },
-            divider: "#E0E0E0",
+            background: { default: COLORS.LIGHT_BG, paper: COLORS.LIGHT_PAPER },
+            text: {
+              primary: COLORS.LIGHT_TEXT_PRIMARY,
+              secondary: COLORS.LIGHT_TEXT_SECONDARY,
+            },
+            divider: COLORS.LIGHT_DIVIDER,
           }
         : {
-            background: { default: "#121212", paper: "#1E1E1E" },
-            text: { primary: "#E0E0E0", secondary: "#A0A0A0" },
-            divider: "#333333",
+            background: { default: COLORS.DARK_BG, paper: COLORS.DARK_PAPER },
+            text: {
+              primary: COLORS.DARK_TEXT_PRIMARY,
+              secondary: COLORS.DARK_TEXT_SECONDARY,
+            },
+            divider: COLORS.DARK_DIVIDER,
           }),
     },
 
     typography: {
-      fontFamily: "'Poppins', sans-serif",
+      fontFamily: "'Montserrat', sans-serif",
       h1: {
         fontSize: "2.5rem",
         fontWeight: 700,
@@ -78,24 +106,9 @@ export const getTheme = (mode) => {
       caption: { fontSize: "0.75rem" },
     },
 
-    // shape: { borderRadius: 12 },
     spacing: 8,
 
     components: {
-      // MuiCssBaseline: {
-      //   styleOverrides: {
-      //     body: {
-      //       transition:
-      //         "background-color 0.08s ease-in-out, color 0.08s ease-in-out",
-      //     },
-      //     "*": {
-      //       transition:
-      //         "background-color 0.08s ease-in-out, color 0.08s ease-in-out, border-color 0.08s ease-in-out",
-      //     },
-      //   },
-      // },
-
-      // Button Component
       MuiButton: {
         defaultProps: { variant: "contained", color: "primary" },
         styleOverrides: {
@@ -112,7 +125,6 @@ export const getTheme = (mode) => {
         },
       },
 
-      // AppBar Component
       MuiAppBar: {
         styleOverrides: {
           root: {
@@ -122,16 +134,6 @@ export const getTheme = (mode) => {
         },
       },
 
-      // Typography Component
-      MuiTypography: {
-        styleOverrides: {
-          root: {
-            // color: mode === "light" ? "#212529" : "#E0E0E0",
-          },
-        },
-      },
-
-      // Card Component
       MuiCard: {
         styleOverrides: {
           root: ({ theme }) => ({
@@ -146,7 +148,6 @@ export const getTheme = (mode) => {
         },
       },
 
-      // TextField Component
       MuiTextField: {
         defaultProps: { variant: "outlined" },
         styleOverrides: {
@@ -182,110 +183,55 @@ export const getTheme = (mode) => {
         },
       },
 
-      // Form Control (select, radio, checkbox)
-      MuiFormControl: {
-        styleOverrides: {
-          // root: { marginBottom: "16px", marginTop: "16px" },
-          // root: {
-          //   "& .MuiInputBase-root": {
-          //     height: "45px",
-          //   },
-          //   "& .MuiInputBase-input": {
-          //     height: "45px",
-          //     padding: "8px 14px",
-          //   },
-          // },
-        },
-      },
-
-      // Select Component
       MuiSelect: {
         styleOverrides: {
           root: {
-            // backgroundColor: mode === "light" ? "#fff" : "#333",
             color: mode === "light" ? "#000" : "#fff",
             borderRadius: "8px",
             height: "45px",
           },
-          // select: {
-          //   height: "45px",
-          //   padding: "8px 14px",
-          // },
         },
       },
 
-      // Checkbox Component
       MuiCheckbox: {
         styleOverrides: {
           root: {
-            // color: mode === "light" ? "#FF6B35" : "#FF6B35",
             "&.Mui-checked": {
-              color: "#FF6B35",
+              color: COLORS.PRIMARY,
             },
           },
         },
       },
 
-      // Radio Button Component
       MuiRadio: {
         styleOverrides: {
           root: {
-            // color: mode === "light" ? "#FF6B35" : "#FF6B35",
             "&.Mui-checked": {
-              color: "#FF6B35",
+              color: COLORS.PRIMARY,
             },
           },
         },
       },
 
-      // Slider Component
-      MuiSlider: {
-        styleOverrides: {
-          root: {
-            // color: mode === "light" ? "#FF6B35" : "#FF6B35",
-          },
-        },
-      },
-
-      // Switch Component
       MuiSwitch: {
         styleOverrides: {
           root: {
             "&.Mui-checked": {
-              color: "#FF6B35",
+              color: COLORS.PRIMARY,
             },
           },
         },
       },
 
-      // Divider Component
       MuiDivider: {
         styleOverrides: {
           root: {
-            backgroundColor: mode === "light" ? "#E0E0E0" : "#333",
+            backgroundColor:
+              mode === "light" ? COLORS.LIGHT_DIVIDER : COLORS.DARK_DIVIDER,
           },
         },
       },
 
-      // Paper Component
-      MuiPaper: {
-        styleOverrides: {
-          root: {
-            // backgroundColor: mode === "light" ? "#fff" : "#1E1E1E",
-          },
-        },
-      },
-
-      // Dialog Component
-      MuiDialog: {
-        styleOverrides: {
-          paper: {
-            // backgroundColor: mode === "light" ? "#fff" : "#333",
-          },
-        },
-      },
-
-      // Table Components
       MuiTable: {
         styleOverrides: {
           root: {
@@ -293,30 +239,31 @@ export const getTheme = (mode) => {
           },
         },
       },
+
       MuiTableCell: {
         styleOverrides: {
           root: {
             padding: "12px",
-            color: mode === "light" ? "#212529" : "#E0E0E0",
+            color:
+              mode === "light"
+                ? COLORS.LIGHT_TEXT_PRIMARY
+                : COLORS.DARK_TEXT_PRIMARY,
           },
         },
       },
 
-      // Chip Component
       MuiChip: {
         styleOverrides: {
           root: { borderRadius: "6px", fontWeight: 600 },
         },
       },
 
-      // List Item Component
       MuiListItem: {
         styleOverrides: {
           root: { borderRadius: "8px", transition: "0.3s" },
         },
       },
 
-      // Snackbar Component
       MuiSnackbar: {
         styleOverrides: {
           root: {
@@ -325,6 +272,7 @@ export const getTheme = (mode) => {
         },
       },
     },
+
     MuiInputAdornment: {
       styleOverrides: {
         root: {

@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     svgr(),
     federation({
-      name: "nexCartMfUI",
+      name: "SpiseBowlMfUI",
       filename: "remoteEntry.js",
       exposes: {
         "./sharedComp": "./src/sharedComp",
