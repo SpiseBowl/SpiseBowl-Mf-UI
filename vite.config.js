@@ -68,7 +68,7 @@ export default defineConfig({
           try {
             await fetch("http://localhost:5000/__fullReload");
           } catch (e) {
-            // noop
+            console.error("Failed to notify host on rebuild:", e);
           }
         }
       },
