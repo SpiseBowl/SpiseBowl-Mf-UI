@@ -36,7 +36,7 @@ import {
 } from "@mui/icons-material";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../theme/ThemeProviderWrapper";
-import { LOGO, LOGO_1 } from "../assets";
+import { LOGO_1 } from "../assets";
 
 function AdminLayout({ children, version, openLogoutDialog }) {
   // // initial state

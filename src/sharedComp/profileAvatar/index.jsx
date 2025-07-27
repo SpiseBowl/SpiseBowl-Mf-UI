@@ -15,7 +15,7 @@ import {
 import { Edit as EditIcon } from "@mui/icons-material";
 import { getCroppedImg } from "../../helpers";
 console.log("AvatarUpload component loaded");
-const AvatarUpload = ({ avatar, onSave, viewOnly = false, ...rest }) => {
+const AvatarUpload = memo(({ avatar, onSave, viewOnly = false, ...rest }) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -145,7 +145,7 @@ const AvatarUpload = ({ avatar, onSave, viewOnly = false, ...rest }) => {
       </Dialog>
     </>
   );
-};
+});
 
 AvatarUpload.propTypes = {
   avatar: PropTypes.string.isRequired,
@@ -153,4 +153,4 @@ AvatarUpload.propTypes = {
   viewOnly: PropTypes.bool,
 };
 
-export default memo(AvatarUpload);
+export default AvatarUpload;
