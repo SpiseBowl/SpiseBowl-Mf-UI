@@ -2,7 +2,7 @@ name: Deploy SpiseBowl-Mf-UI Storybook to GitHub Pages
 
 on:
   push:
-    branches: [storybook]
+    branches: [main]
 
 jobs:
   deploy:
