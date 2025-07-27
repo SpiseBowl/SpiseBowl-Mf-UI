@@ -268,30 +268,6 @@ function FormInput({
             />
           );
         }
-        if (inputType === "phone") {
-          return (
-            <FormControl fullWidth error={!!error} sx={{ mb: 2 }}>
-              <InputLabel shrink>{label}</InputLabel>
-              <StyledPhoneInputWrapper theme={theme}>
-                <PhoneInput
-                  country="us"
-                  value={field.value || ""}
-                  onChange={field.onChange}
-                  inputProps={{
-                    name: field.name,
-                    required: rest.required || false,
-                    autoFocus: rest.autoFocus || false,
-                  }}
-                  inputStyle={{
-                    width: "100%",
-                  }}
-                  specialLabel=""
-                />
-              </StyledPhoneInputWrapper>
-              <FormHelperText>{error?.message}</FormHelperText>
-            </FormControl>
-          );
-        }
 
         // 📂 FILE INPUT (react-dropzone)
         if (inputType === "file") {
@@ -376,6 +352,9 @@ FormInput.propTypes = {
   label: PropTypes.string.isRequired,
   inputType: PropTypes.oneOf([
     "text",
+    "password",
+    "email",
+    "number",
     "select",
     "radio",
     "checkbox",
@@ -386,7 +365,7 @@ FormInput.propTypes = {
   ]),
   options: PropTypes.array,
   multiple: PropTypes.bool,
-  rowHeight: PropTypes.number || PropTypes.string,
+  rowHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default FormInput;

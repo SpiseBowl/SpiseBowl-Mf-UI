@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     svgr(),
     federation({
-      name: "nexCartMfUI",
+      name: "SpiseBowlMfUI",
       filename: "remoteEntry.js",
       exposes: {
         "./sharedComp": "./src/sharedComp",
@@ -68,7 +68,7 @@ export default defineConfig({
           try {
             await fetch("http://localhost:5000/__fullReload");
           } catch (e) {
-            // noop
+            console.error("Failed to notify host on rebuild:", e);
           }
         }
       },

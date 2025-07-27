@@ -36,7 +36,7 @@ import {
 } from "@mui/icons-material";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../theme/ThemeProviderWrapper";
-import { Logo } from "../assets";
+import { LOGO_1 } from "../assets";
 
 function AdminLayout({ children, version, openLogoutDialog }) {
   // // initial state
@@ -168,20 +168,22 @@ function AdminLayout({ children, version, openLogoutDialog }) {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography
-            variant="h6"
+          <Box
             flexGrow={1}
             sx={{
-              textAlign: { xs: "center", md: "left" },
-              svg: {
+              display: "flex",
+              alignItems: "center",
+              justifyContent: { xs: "center", md: "start" },
+              img: {
                 width: { xs: 160, md: 200 },
-                height: "auto",
+                cursor: "pointer",
               },
             }}
             onClick={() => navigate("/")}
           >
-            <Logo />
-          </Typography>
+            {/* <Logo /> */}
+            <Box component="img" src={LOGO_1} alt="SpiseBowl Logo" sx={{}} />
+          </Box>
           <IconButton onClick={toggleTheme} color="inherit">
             {mode === "light" ? <DarkMode /> : <LightMode />}
           </IconButton>
