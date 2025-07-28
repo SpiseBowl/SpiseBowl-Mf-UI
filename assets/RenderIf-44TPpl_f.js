@@ -1,0 +1,1 @@
+import{importShared as p}from"./__federation_fn_import-CwlTE-Wn.js";const e=await p("prop-types"),i=({render:r,children:o})=>r?o:null;i.propTypes={render:e.bool.isRequired,children:e.node.isRequired};export{i as R};
