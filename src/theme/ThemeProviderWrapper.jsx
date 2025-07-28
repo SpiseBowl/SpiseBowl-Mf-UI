@@ -1,20 +1,24 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useMemo, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import { getTheme } from "./theme";
+import { getTheme } from "./";
 
 const ThemeContext = createContext();
 
-const ThemeProviderWrapper = ({ children }) => {
-  const [mode, setMode] = useState("dark");
+const ThemeProviderWrapper = ({ children, mode: externalMode }) => {
+  const [mode, setMode] = useState(externalMode || "dark");
+
+  useEffect(() => {
+    if (externalMode) setMode(externalMode);
+  }, [externalMode]);
+
   const toggleTheme = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
+
   const theme = useMemo(() => getTheme(mode), [mode]);
-  const contextValue = useMemo(
-    () => ({ mode, toggleTheme }),
-    [mode, toggleTheme]
-  );
+
+  const contextValue = useMemo(() => ({ mode, toggleTheme }), [mode]);
 
   return (
     <ThemeContext.Provider value={contextValue}>
@@ -28,6 +32,7 @@ const ThemeProviderWrapper = ({ children }) => {
 
 ThemeProviderWrapper.propTypes = {
   children: PropTypes.node.isRequired,
+  mode: PropTypes.oneOf(["light", "dark"]),
 };
 
 export { ThemeProviderWrapper, ThemeContext };
