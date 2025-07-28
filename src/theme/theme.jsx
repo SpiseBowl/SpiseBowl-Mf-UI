@@ -1,26 +1,6 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-
 // 🎨 Color Constants
-const COLORS = {
-  PRIMARY: "#FF6B35",
-  SECONDARY: "#354aff",
-  ERROR: "#E63946",
-  WARNING: "#FFB703",
-  SUCCESS: "#4CAF50",
-  INFO: "#2196F3",
-
-  LIGHT_BG: "#f7f7f7",
-  LIGHT_PAPER: "#FFFFFF",
-  LIGHT_TEXT_PRIMARY: "#212529",
-  LIGHT_TEXT_SECONDARY: "#6C757D",
-  LIGHT_DIVIDER: "#E0E0E0",
-
-  DARK_BG: "#121212",
-  DARK_PAPER: "#1E1E1E",
-  DARK_TEXT_PRIMARY: "#E0E0E0",
-  DARK_TEXT_SECONDARY: "#A0A0A0",
-  DARK_DIVIDER: "#333333",
-};
+import { COLORS } from "./";
 
 export const getTheme = (mode) => {
   let theme = createTheme({

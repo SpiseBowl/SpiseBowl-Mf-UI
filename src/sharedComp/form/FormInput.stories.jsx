@@ -50,8 +50,6 @@ import { FormInput } from "SpiseBowlMfUI/sharedComp";
 
 // 🔧 Setup a form wrapper
 const Template = (args) => {
-  const theme = useTheme();
-
   const methods = useForm({
     defaultValues: {
       [args.name]: args.defaultValue || "",
