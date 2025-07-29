@@ -20,6 +20,7 @@ export default defineConfig({
         "./assets": "./src/assets",
         "./hooks": "./src/hooks",
         "./hoc": "./src/hoc",
+        "./utility": "./src/utility",
       },
       shared: {
         react: {

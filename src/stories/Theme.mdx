@@ -1,0 +1,130 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Theme/Theme" />
+
+# 🎨 Theme System (MUI + Context)
+
+Your app uses a custom MUI theme system with a `ThemeContext`, `ThemeProviderWrapper`, and utility functions to support both **light** and **dark** modes using a shared color palette.
+
+---
+
+## ✳️ Exported Items
+
+- `COLORS` — Central color tokens used across the theme
+- `getTheme(mode)` — Returns a full MUI theme object based on `"light"` or `"dark"`
+- `ThemeContext` — React Context for accessing theme mode and toggle function
+- `ThemeProviderWrapper` — Provides the theme and context to your app
+
+---
+
+## 🎨 `COLORS`
+
+A consistent token-based color system used in both light and dark themes.
+
+```js
+import COLORS from "./colors";
+
+console.log(COLORS.PRIMARY); // "#FF6B35"
+```
+
+Some available colors:
+
+```
+| Token               | Example   |
+| ------------------- | --------- |
+| `PRIMARY`           | `#FF6B35` |
+| `SECONDARY`         | `#354aff` |
+| `ERROR`             | `#E63946` |
+| `LIGHT_BG`          | `#f7f7f7` |
+| `DARK_TEXT_PRIMARY` | `#E0E0E0` |
+```
+
+---
+
+## ⚙️ `getTheme(mode)`
+
+Returns a full responsive Material UI theme customized for light or dark mode.
+
+```js
+import { getTheme } from "./theme";
+
+const theme = getTheme("light");
+```
+
+- Uses responsive font sizes
+- Supports all standard MUI palette keys: `primary`, `secondary`, `error`, `success`, etc.
+- Typography and spacing are customized
+- Overrides many MUI components (e.g. `MuiButton`, `MuiCard`, `MuiTextField`)
+
+---
+
+## 🧠 `ThemeContext`
+
+React context with two values:
+
+```js
+const { mode, toggleTheme } = useContext(ThemeContext);
+```
+
+- `mode`: `"light"` or `"dark"`
+- `toggleTheme`: Function to switch between modes
+
+---
+
+## 🧥 `ThemeProviderWrapper`
+
+Wraps your app and provides the theme context and styling.
+
+```jsx
+import { ThemeProviderWrapper } from "./ThemeProviderWrapper";
+
+<ThemeProviderWrapper>
+  <App />
+</ThemeProviderWrapper>;
+```
+
+It supports an optional `mode` prop and reads `"user_theme"` from cookies if not provided.
+
+```jsx
+<ThemeProviderWrapper mode="light">
+  <App />
+</ThemeProviderWrapper>
+```
+
+---
+
+## 💡 Theme Switch Example
+
+```js
+import React, { useContext } from "react";
+import { ThemeContext } from "./ThemeProviderWrapper";
+import { Button } from "@mui/material";
+
+const ThemeToggleButton = () => {
+  const { mode, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <Button onClick={toggleTheme}>
+      Switch to {mode === "light" ? "Dark" : "Light"} Mode
+    </Button>
+  );
+};
+```
+
+---
+
+## 📦 Cookie Integration
+
+- Reads the cookie `user_theme` (light/dark) on load.
+- Stores theme preference using cookie helpers.
+
+---
+
+## 📚 Related Files
+
+- `/theme/colors.js`
+- `/theme/theme.js`
+- `/theme/ThemeProviderWrapper.js`
+- `/utility/cookies.js`
+
+---
