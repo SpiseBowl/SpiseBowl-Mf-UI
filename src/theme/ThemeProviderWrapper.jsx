@@ -2,11 +2,13 @@ import { createContext, useMemo, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { getTheme } from "./";
+import { cookies } from "../utility";
 
 const ThemeContext = createContext();
 
 const ThemeProviderWrapper = ({ children, mode: externalMode }) => {
-  const [mode, setMode] = useState(externalMode || "dark");
+  const currentTheme = cookies.getCookie("user_theme")?.toLocaleLowerCase();
+  const [mode, setMode] = useState(externalMode || currentTheme || "dark");
 
   useEffect(() => {
     if (externalMode) setMode(externalMode);

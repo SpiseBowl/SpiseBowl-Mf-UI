@@ -1,0 +1,159 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Utils/Cookies" />
+
+# 🍪 `cookies` – Cookie Utility Functions
+
+The `cookies` object provides a simple and consistent way to manage browser cookies using plain JavaScript—no React or third-party libraries required.
+
+---
+
+## ✨ Functions Overview
+
+The `cookies` object includes four helpful functions:
+
+- **`cookies.getCookie(name)`** – Gets the value of a cookie by name. Returns `null` if it doesn't exist.
+- **`cookies.setCookie(name, value, options)`** – Creates or updates a cookie. You can pass options like how long it should last, the path, or if it should be secure.
+- **`cookies.removeCookie(name, options)`** – Deletes a cookie. You can also add options like the path if needed.
+- **`cookies.parseAllCookies()`** – Returns all cookies as a key–value object.
+
+---
+
+## 📦 Importing
+
+```js
+import { cookies } from "SpiseBowlMfUI/utility";
+```
+
+---
+
+## 🔍 `cookies.getCookie(name)`
+
+Gets the value of a cookie by name.
+
+```js
+const token = cookies.getCookie("token");
+console.log(token); // "abc123" or null if not found
+```
+
+---
+
+## 🧪 `cookies.setCookie(name, value, options)`
+
+Sets or updates a cookie with optional settings.
+
+```js
+cookies.setCookie("token", "abc123", {
+  maxAgeDays: 7,
+  path: "/",
+  secure: true,
+  sameSite: "Lax",
+});
+```
+
+### ✅ Supported `options`
+
+- `maxAgeDays`, `maxAgeHours`, `maxAgeMinutes`, `maxAge` (in seconds)
+- `path`
+- `domain`
+- `secure`
+- `sameSite` (`Strict`, `Lax`, `None`)
+
+---
+
+## 🧹 `cookies.removeCookie(name, options)`
+
+Removes a cookie by setting its `max-age` to `0`.
+
+```js
+cookies.removeCookie("token");
+```
+
+You can pass options like `path` to match the original cookie settings.
+
+---
+
+## 🧾 `cookies.parseAllCookies()`
+
+Returns all current cookies as a plain object.
+
+```js
+const allCookies = cookies.parseAllCookies();
+console.log(allCookies);
+// { token: "abc123", sessionId: "xyz456" }
+```
+
+---
+
+## 💡 Example Workflow
+
+```js
+// Set a cookie
+cookies.setCookie("mode", "dark", { maxAgeMinutes: 30 });
+
+// Get the cookie
+const mode = cookies.getCookie("mode");
+console.log("Mode is:", mode); // dark
+
+// Remove the cookie
+cookies.removeCookie("mode");
+```
+
+---
+
+## ⚠️ Browser Notes
+
+- `document.cookie` is scoped by domain and path.
+- Changes can be inspected via DevTools: **Application → Storage → Cookies**.
+- Secure cookies will only work over HTTPS.
+
+---
+
+## 📚 Source Code
+
+```js
+function parseAllCookies() {
+  return document.cookie.split("; ").reduce((acc, cookie) => {
+    const [name, ...val] = cookie.split("=");
+    acc[name] = decodeURIComponent(val.join("="));
+    return acc;
+  }, {});
+}
+
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+
+function setCookie(name, value, options = {}) {
+  let cookieStr = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+
+  if (options.maxAgeDays !== undefined) {
+    cookieStr += `; max-age=${options.maxAgeDays * 24 * 3600}`;
+  } else if (options.maxAgeHours !== undefined) {
+    cookieStr += `; max-age=${options.maxAgeHours * 3600}`;
+  } else if (options.maxAgeMinutes !== undefined) {
+    cookieStr += `; max-age=${options.maxAgeMinutes * 60}`;
+  } else if (options.maxAge !== undefined) {
+    cookieStr += `; max-age=${options.maxAge}`;
+  }
+
+  if (options.path) cookieStr += `; path=${options.path}`;
+  if (options.domain) cookieStr += `; domain=${options.domain}`;
+  if (options.secure) cookieStr += `; secure`;
+  if (options.sameSite) cookieStr += `; samesite=${options.sameSite}`;
+
+  document.cookie = cookieStr;
+}
+
+function removeCookie(name, options = {}) {
+  setCookie(name, "", { ...options, path: "/", maxAge: 0 });
+}
+
+export const cookies = {
+  getCookie,
+  setCookie,
+  removeCookie,
+  parseAllCookies,
+};
+```
