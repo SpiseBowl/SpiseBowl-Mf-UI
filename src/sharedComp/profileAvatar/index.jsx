@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 import { getCroppedImg } from "../../helpers";
-console.log("AvatarUpload component loaded");
 const AvatarUpload = memo(({ avatar, onSave, viewOnly = false, ...rest }) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -41,9 +40,10 @@ const AvatarUpload = memo(({ avatar, onSave, viewOnly = false, ...rest }) => {
   }, []);
 
   const handleCropSave = async () => {
-    const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
-    setPreview(croppedImage);
-    onSave?.(croppedImage);
+    const croppedImageFile = await getCroppedImg(imageSrc, croppedAreaPixels);
+    const previewUrl = URL.createObjectURL(croppedImageFile);
+    setPreview(previewUrl);
+    onSave?.(croppedImageFile);
     setOpenCrop(false);
   };
 

@@ -26,8 +26,8 @@ export default function getCroppedImg(imageSrc, crop) {
           reject(new Error("Canvas is empty"));
           return;
         }
-        const fileUrl = URL.createObjectURL(blob);
-        resolve(fileUrl);
+        const file = new File([blob], "photo.jpg", { type: "image/jpeg" });
+        resolve(file);
       }, "image/jpeg");
     };
     image.onerror = (error) => reject(error);
