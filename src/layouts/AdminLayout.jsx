@@ -37,8 +37,9 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../theme/ThemeProviderWrapper";
 import { LOGO_1 } from "../assets";
+import { VITE_APP_ASSETS_PATH } from "../config/env";
 
-function AdminLayout({ children, version, openLogoutDialog }) {
+function AdminLayout({ children, version, openLogoutDialog, profileData }) {
   // // initial state
   const drawerWidth = 270;
   const theme = useTheme();
@@ -191,8 +192,8 @@ function AdminLayout({ children, version, openLogoutDialog }) {
             <Tooltip title="User Settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
-                  alt="User Avatar"
-                  src="https://mui.com/static/images/avatar/2.jpg"
+                  src={`${VITE_APP_ASSETS_PATH}${profileData?.folderLocation}/${profileData?.photo}`}
+                  alt={`${profileData.firstName} ${profileData.lastName}`}
                   sx={{ cursor: "pointer" }}
                 />
               </IconButton>
@@ -299,6 +300,7 @@ AdminLayout.propTypes = {
   children: PropTypes.node.isRequired,
   version: PropTypes.string.isRequired || PropTypes.number.isRequired,
   openLogoutDialog: PropTypes.func.isRequired,
+  profileData: PropTypes.object.isRequired,
 };
 
 export default AdminLayout;
