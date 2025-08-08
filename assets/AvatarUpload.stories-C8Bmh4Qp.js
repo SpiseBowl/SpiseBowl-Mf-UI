@@ -1,4 +1,4 @@
-import{A as e}from"./index-CVFW0Qnt.js";const o={title:"SharedComponents/AvatarUpload",component:e,tags:["autodocs"],parameters:{layout:"centered",docs:{description:{component:`
+import{A as e}from"./index-D-aBTDLW.js";const o={title:"SharedComponents/AvatarUpload",component:e,tags:["autodocs"],parameters:{layout:"centered",docs:{description:{component:`
 ### 📷 AvatarUpload
 Avatar allows users to upload and crop a profile picture using react-easy-crop.
 

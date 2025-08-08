@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as i}from"./index-BusBvLrs.js";import{M as c}from"./blocks-M26lyJ1G.js";function s(n){const o={code:"code",h1:"h1",h2:"h2",h3:"h3",hr:"hr",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...i(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(c,{title:"Utils/Cookies"}),`
+import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as i}from"./index-BusBvLrs.js";import{M as c}from"./blocks-BL_c-4xe.js";function s(n){const o={code:"code",h1:"h1",h2:"h2",h3:"h3",hr:"hr",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...i(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(c,{title:"Utils/Cookies"}),`
 `,e.jsxs(o.h1,{id:"-cookies--cookie-utility-functions",children:["🍪 ",e.jsx(o.code,{children:"cookies"})," – Cookie Utility Functions"]}),`
 `,e.jsxs(o.p,{children:["The ",e.jsx(o.code,{children:"cookies"})," object provides a simple and consistent way to manage browser cookies using plain JavaScript—no React or third-party libraries required."]}),`
 `,e.jsx(o.hr,{}),`
