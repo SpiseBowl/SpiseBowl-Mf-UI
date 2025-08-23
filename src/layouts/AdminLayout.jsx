@@ -49,7 +49,7 @@ function AdminLayout({ children, version, openLogoutDialog, profileData }) {
 
   // // local setup
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const menuItems = [
     { text: "Dashboard", icon: <DashboardTwoTone />, path: "/" },
@@ -182,7 +182,6 @@ function AdminLayout({ children, version, openLogoutDialog, profileData }) {
             }}
             onClick={() => navigate("/")}
           >
-            {/* <Logo /> */}
             <Box component="img" src={LOGO_1} alt="SpiseBowl Logo" sx={{}} />
           </Box>
           <IconButton onClick={toggleTheme} color="inherit">
@@ -193,7 +192,7 @@ function AdminLayout({ children, version, openLogoutDialog, profileData }) {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   src={`${VITE_APP_ASSETS_PATH}${profileData?.folderLocation}/${profileData?.photo}`}
-                  alt={`${profileData.firstName} ${profileData.lastName}`}
+                  alt={`${profileData?.firstName} ${profileData?.lastName}`}
                   sx={{ cursor: "pointer" }}
                 />
               </IconButton>

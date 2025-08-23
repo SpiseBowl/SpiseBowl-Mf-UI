@@ -37,9 +37,6 @@ export const decorators = [
 ];
 
 export const parameters = {
-  initialGlobals: {
-    // viewport: { value: "ipad", isRotated: false },
-  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   docs: {
     codePanel: true,
