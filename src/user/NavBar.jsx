@@ -1,144 +1,189 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AppBar,
   Box,
   CssBaseline,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Toolbar,
   Typography,
   Button,
+  useTheme,
+  IconButton,
+  ListItemIcon,
+  MenuItem,
+  Popover,
+  Avatar,
+  Tooltip,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+import { Link, useNavigate } from "react-router-dom";
+import {
+  AccountCircle,
+  DarkMode,
+  Info,
+  LightMode,
+  Logout,
+  RiceBowl,
+} from "@mui/icons-material";
 
-function NavBar(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
+import { LOGO_1 } from "../assets";
+import { ThemeContext } from "../theme";
+import PropTypes from "prop-types";
+import { VITE_APP_ASSETS_PATH } from "../config/env";
+import { NAV_DOCK_HEIGHT, navItems } from "./constant";
 
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+function NavBar({ version = "0.0.0", openLogoutDialog, profileData = {} }) {
+  // // initial state
+  const theme = useTheme();
+  const { mode, toggleTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
+
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > NAV_DOCK_HEIGHT + 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          // <ListItem key={item} disablePadding>
-          <ListItemButton sx={{ textAlign: "center" }} key={item}>
-            <ListItemText primary={item} />
-          </ListItemButton>
-          // </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <>
       <CssBaseline />
-      <AppBar component="nav">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+      <AppBar
+        component="nav"
+        sx={{
+          backgroundColor: "transparent",
+          backdropFilter: scrolled ? "blur(10px)" : "none",
+          transition: "all 0.3s ease",
+          boxShadow: scrolled ? theme.shadows[2] : "none",
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            MUI
-          </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+              <Button
+                key={item.label}
+                variant="text"
+                component={Link}
+                to={item.path}
+                color="inherit"
+              >
+                {item.label}
               </Button>
             ))}
           </Box>
+
+          <Box
+            component="img"
+            src={LOGO_1}
+            alt="SpiseBowl Logo"
+            sx={{ width: { xs: 160, md: 200 }, cursor: "pointer" }}
+            onClick={() => navigate("/")}
+          />
+
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <IconButton onClick={toggleTheme} color="inherit">
+              {mode === "light" ? <DarkMode /> : <LightMode />}
+            </IconButton>
+
+            <IconButton color="inherit" component={Link} to="/cart">
+              <RiceBowl />
+            </IconButton>
+
+            <Box sx={{ flexGrow: 0, ml: 2 }}>
+              <Tooltip title="User Settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar
+                    src={`${VITE_APP_ASSETS_PATH}${profileData?.folderLocation}/${profileData?.photo}`}
+                    alt={`${profileData?.firstName} ${profileData?.lastName}`}
+                    sx={{ cursor: "pointer" }}
+                  />
+                </IconButton>
+              </Tooltip>
+
+              <Popover
+                id="user-menu"
+                anchorEl={anchorElUser}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                PaperProps={{ sx: { minWidth: 180 } }}
+              >
+                <MenuItem disabled>
+                  <ListItemIcon>
+                    <Info fontSize="small" />
+                  </ListItemIcon>
+                  <Typography variant="inherit">Version: {version}</Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    navigate("/profile");
+                  }}
+                >
+                  <ListItemIcon>
+                    <AccountCircle fontSize="small" />
+                  </ListItemIcon>
+                  <Typography variant="inherit">Profile</Typography>
+                </MenuItem>
+
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    openLogoutDialog();
+                  }}
+                >
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  <Typography variant="inherit">Logout</Typography>
+                </MenuItem>
+              </Popover>
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
-        <Typography>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-          unde fugit veniam eius, perspiciatis sunt? Corporis qui ducimus
-          quibusdam, aliquam dolore excepturi quae. Distinctio enim at eligendi
-          perferendis in cum quibusdam sed quae, accusantium et aperiam? Quod
-          itaque exercitationem, at ab sequi qui modi delectus quia corrupti
-          alias distinctio nostrum. Minima ex dolor modi inventore sapiente
-          necessitatibus aliquam fuga et. Sed numquam quibusdam at officia
-          sapiente porro maxime corrupti perspiciatis asperiores, exercitationem
-          eius nostrum consequuntur iure aliquam itaque, assumenda et! Quibusdam
-          temporibus beatae doloremque voluptatum doloribus soluta accusamus
-          porro reprehenderit eos inventore facere, fugit, molestiae ab officiis
-          illo voluptates recusandae. Vel dolor nobis eius, ratione atque
-          soluta, aliquam fugit qui iste architecto perspiciatis. Nobis,
-          voluptatem! Cumque, eligendi unde aliquid minus quis sit debitis
-          obcaecati error, delectus quo eius exercitationem tempore. Delectus
-          sapiente, provident corporis dolorum quibusdam aut beatae repellendus
-          est labore quisquam praesentium repudiandae non vel laboriosam quo ab
-          perferendis velit ipsa deleniti modi! Ipsam, illo quod. Nesciunt
-          commodi nihil corrupti cum non fugiat praesentium doloremque
-          architecto laborum aliquid. Quae, maxime recusandae? Eveniet dolore
-          molestiae dicta blanditiis est expedita eius debitis cupiditate porro
-          sed aspernatur quidem, repellat nihil quasi praesentium quia eos,
-          quibusdam provident. Incidunt tempore vel placeat voluptate iure
-          labore, repellendus beatae quia unde est aliquid dolor molestias
-          libero. Reiciendis similique exercitationem consequatur, nobis placeat
-          illo laudantium! Enim perferendis nulla soluta magni error, provident
-          repellat similique cupiditate ipsam, et tempore cumque quod! Qui, iure
-          suscipit tempora unde rerum autem saepe nisi vel cupiditate iusto.
-          Illum, corrupti? Fugiat quidem accusantium nulla. Aliquid inventore
-          commodi reprehenderit rerum reiciendis! Quidem alias repudiandae eaque
-          eveniet cumque nihil aliquam in expedita, impedit quas ipsum nesciunt
-          ipsa ullam consequuntur dignissimos numquam at nisi porro a, quaerat
-          rem repellendus. Voluptates perspiciatis, in pariatur impedit, nam
-          facilis libero dolorem dolores sunt inventore perferendis, aut
-          sapiente modi nesciunt.
-        </Typography>
-      </Box>
-    </Box>
+      <Toolbar />
+    </>
   );
 }
 
 export default NavBar;
+
+NavBar.propTypes = {
+  version: PropTypes.string.isRequired,
+  openLogoutDialog: PropTypes.func.isRequired,
+  profileData: PropTypes.object.isRequired,
+};
