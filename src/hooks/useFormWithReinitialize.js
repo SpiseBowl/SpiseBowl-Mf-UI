@@ -12,8 +12,8 @@ export function useFormWithReinitialize({
     if (enableReinitialize) {
       methods.reset(defaultValues);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enableReinitialize, ...Object.values(defaultValues)]);
+    // Only reset when the stringified defaultValues change
+  }, [enableReinitialize, JSON.stringify(defaultValues)]);
 
   return methods;
 }
