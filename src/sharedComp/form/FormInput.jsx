@@ -17,6 +17,8 @@ import {
   Typography,
   IconButton,
   Switch,
+  OutlinedInput,
+  Chip,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Controller } from "react-hook-form";
@@ -124,10 +126,65 @@ function FormInput({
 
         // 🔘 SELECT
         if (inputType === "select") {
+          if (multiple) {
+            return (
+              <FormControl fullWidth error={!!error} sx={{ mb: 2 }}>
+                <InputLabel>{label}</InputLabel>
+                <Select
+                  multiple
+                  value={field.value || []}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  input={<OutlinedInput label={label} />}
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => {
+                        const selectedOpt = options.find(
+                          (opt) => opt.value === value
+                        );
+                        return (
+                          <Chip
+                            key={value}
+                            label={selectedOpt ? selectedOpt.label : value}
+                            onDelete={(e) => {
+                              e.stopPropagation();
+                              const newValue = selected.filter(
+                                (v) => v !== value
+                              );
+                              field.onChange(newValue);
+                            }}
+                            onMouseDown={(event) => event.stopPropagation()}
+                          />
+                        );
+                      })}
+                    </Box>
+                  )}
+                  MenuProps={{
+                    PaperProps: {
+                      style: { maxHeight: 48 * 4.5 + 8, width: 250 },
+                    },
+                  }}
+                >
+                  {options.map((opt) => (
+                    <MenuItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>{error?.message}</FormHelperText>
+              </FormControl>
+            );
+          }
+
+          // Default single select
           return (
             <FormControl fullWidth error={!!error} sx={{ mb: 2 }}>
               <InputLabel>{label}</InputLabel>
-              <Select label={label} {...field} {...rest}>
+              <Select
+                value={field.value || ""}
+                onChange={(e) => field.onChange(e.target.value)}
+                label={label}
+                {...rest}
+              >
                 {options.map((opt) => (
                   <MenuItem key={opt.value} value={opt.value}>
                     {opt.label}
@@ -302,7 +359,7 @@ function FormInput({
                 isDragActive={isDragActive ? 1 : 0}
                 rowHeight={rowHeight}
               >
-                <input {...getInputProps()} />
+                <input {...getInputProps()} {...rest} />
                 {isDragActive ? (
                   <Typography>Drop files here...</Typography>
                 ) : (

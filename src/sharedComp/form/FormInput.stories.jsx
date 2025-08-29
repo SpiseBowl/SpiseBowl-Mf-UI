@@ -164,3 +164,20 @@ SwitchInput.args = {
   label: "Subscribe to newsletter",
   inputType: "switch",
 };
+
+export const MultiSelectInput = Template.bind({});
+MultiSelectInput.args = {
+  name: "tags",
+  label: "Tags",
+  inputType: "select",
+  multiple: true, // enable multi-select
+  options: [
+    { label: "Spicy", value: "spicy" },
+    { label: "Best Seller", value: "best_seller" },
+    { label: "Trending", value: "trending" },
+    { label: "Chef's Special", value: "chef_special" },
+    { label: "Tasty", value: "tasty" },
+    { label: "Cold", value: "cold" },
+  ],
+  defaultValue: ["spicy", "best_seller"], // initial selected values
+};
