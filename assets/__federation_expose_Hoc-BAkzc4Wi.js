@@ -1,1 +1,0 @@
-import{importShared as e}from"./__federation_fn_import-MqhboSMQ.js";import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{useCookies as a}from"./__federation_expose_Hooks-BkSvENsK.js";await e("react");const{Navigate:i}=await e("react-router-dom"),d=r=>o=>{const{getCookie:s}=a();return s("auth_token")?t.jsx(i,{to:"/",replace:!0}):t.jsx(r,{...o})};export{d as RestrictedToGuests};

@@ -1,4 +1,4 @@
-import{importShared as s}from"./__federation_fn_import-MqhboSMQ.js";import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{RestrictedToGuests as r}from"./__federation_expose_Hoc-BAkzc4Wi.js";await s("react");const n=()=>t.jsx("div",{children:"Only visible to unauthenticated users"}),o=r(n),p={title:"HOC/RestrictedToGuests",component:o,tags:["autodocs"],parameters:{docs:{description:{component:`
+import{importShared as s}from"./__federation_fn_import-MqhboSMQ.js";import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{RestrictedToGuests as r}from"./__federation_expose_Hoc-Blfxx3pY.js";await s("react");const n=()=>t.jsx("div",{children:"Only visible to unauthenticated users"}),o=r(n),p={title:"HOC/RestrictedToGuests",component:o,tags:["autodocs"],parameters:{docs:{description:{component:`
 ### 🔐 RestrictedToGuests
 A Higher-Order Component (HOC) that **redirects authenticated users** away from guest-only pages.
 
