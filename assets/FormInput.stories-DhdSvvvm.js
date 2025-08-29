@@ -1,4 +1,4 @@
-import{importShared as h}from"./__federation_fn_import-MqhboSMQ.js";import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{F as S}from"./FormInput-L7Y-K3bZ.js";await h("react");const{useForm:x,FormProvider:F}=await h("react-hook-form"),{Box:B,Button:I,useTheme:V}=await h("@mui/material"),T={title:"SharedComponents/FormInput",component:S,tags:["autodocs"],parameters:{docs:{description:{component:`
+import{importShared as S}from"./__federation_fn_import-MqhboSMQ.js";import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{F as g}from"./FormInput-g04uc56a.js";await S("react");const{useForm:x,FormProvider:v}=await S("react-hook-form"),{Box:B,Button:y,useTheme:T}=await S("@mui/material"),w={title:"SharedComponents/FormInput",component:g,tags:["autodocs"],parameters:{docs:{description:{component:`
 ### 🧾 FormInput
 A powerful and flexible input component for React Hook Form using MUI.
 
@@ -30,7 +30,7 @@ import { FormInput } from "SpiseBowlMfUI/sharedComp";
   inputType="text"
 />
 \`\`\`
-        `}}}},n=p=>{const b=x({defaultValues:{[p.name]:p.defaultValue||""}}),g=f=>{alert(JSON.stringify(f,null,2))};return t.jsx(F,{...b,children:t.jsx("form",{onSubmit:b.handleSubmit(g),children:t.jsxs(B,{maxWidth:500,children:[t.jsx(S,{...p,control:b.control}),t.jsx(I,{type:"submit",variant:"contained",children:"Submit"})]})})})},e=n.bind({});e.args={name:"username",label:"Username",inputType:"text",defaultValue:"john_doe"};const o=n.bind({});o.args={name:"gender",label:"Gender",inputType:"select",options:[{label:"Male",value:"male"},{label:"Female",value:"female"}]};const r=n.bind({});r.args={name:"status",label:"Status",inputType:"radio",options:[{label:"Active",value:"active"},{label:"Inactive",value:"inactive"}]};const a=n.bind({});a.args={name:"agree",label:"I agree to terms",inputType:"checkbox"};const s=n.bind({});s.args={name:"bio",label:"Bio",inputType:"textarea",rows:3};const m=n.bind({});m.args={name:"phone",label:"Phone Number",inputType:"phone"};const u=n.bind({});u.args={name:"resume",label:"Upload Resume",inputType:"file",multiple:!1,rowHeight:2};const i=n.bind({});i.args={name:"password",label:"Password",inputType:"password"};const l=n.bind({});l.args={name:"email",label:"Email",inputType:"email",defaultValue:"test@example.com"};const d=n.bind({});d.args={name:"age",label:"Age",inputType:"number"};const c=n.bind({});c.args={name:"subscribe",label:"Subscribe to newsletter",inputType:"switch"};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`args => {
+        `}}}},n=b=>{const h=x({defaultValues:{[b.name]:b.defaultValue||""}}),f=F=>{alert(JSON.stringify(F,null,2))};return t.jsx(v,{...h,children:t.jsx("form",{onSubmit:h.handleSubmit(f),children:t.jsxs(B,{maxWidth:500,children:[t.jsx(g,{...b,control:h.control}),t.jsx(y,{type:"submit",variant:"contained",children:"Submit"})]})})})},e=n.bind({});e.args={name:"username",label:"Username",inputType:"text",defaultValue:"john_doe"};const o=n.bind({});o.args={name:"gender",label:"Gender",inputType:"select",options:[{label:"Male",value:"male"},{label:"Female",value:"female"}]};const r=n.bind({});r.args={name:"status",label:"Status",inputType:"radio",options:[{label:"Active",value:"active"},{label:"Inactive",value:"inactive"}]};const a=n.bind({});a.args={name:"agree",label:"I agree to terms",inputType:"checkbox"};const s=n.bind({});s.args={name:"bio",label:"Bio",inputType:"textarea",rows:3};const m=n.bind({});m.args={name:"phone",label:"Phone Number",inputType:"phone"};const u=n.bind({});u.args={name:"resume",label:"Upload Resume",inputType:"file",multiple:!1,rowHeight:2};const i=n.bind({});i.args={name:"password",label:"Password",inputType:"password"};const l=n.bind({});l.args={name:"email",label:"Email",inputType:"email",defaultValue:"test@example.com"};const d=n.bind({});d.args={name:"age",label:"Age",inputType:"number"};const c=n.bind({});c.args={name:"subscribe",label:"Subscribe to newsletter",inputType:"switch"};const p=n.bind({});p.args={name:"tags",label:"Tags",inputType:"select",multiple:!0,options:[{label:"Spicy",value:"spicy"},{label:"Best Seller",value:"best_seller"},{label:"Trending",value:"trending"},{label:"Chef's Special",value:"chef_special"},{label:"Tasty",value:"tasty"},{label:"Cold",value:"cold"}],defaultValue:["spicy","best_seller"]};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`args => {
   const methods = useForm({
     defaultValues: {
       [args.name]: args.defaultValue || ""
@@ -239,4 +239,23 @@ import { FormInput } from "SpiseBowlMfUI/sharedComp";
         </Box>
       </form>
     </FormProvider>;
-}`,...c.parameters?.docs?.source}}};const w=["TextInput","SelectInput","RadioInput","CheckboxInput","TextareaInput","PhoneInputField","FileInput","PasswordInput","EmailInput","NumberInput","SwitchInput"];export{a as CheckboxInput,l as EmailInput,u as FileInput,d as NumberInput,i as PasswordInput,m as PhoneInputField,r as RadioInput,o as SelectInput,c as SwitchInput,e as TextInput,s as TextareaInput,w as __namedExportsOrder,T as default};
+}`,...c.parameters?.docs?.source}}};p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`args => {
+  const methods = useForm({
+    defaultValues: {
+      [args.name]: args.defaultValue || ""
+    }
+  });
+  const onSubmit = data => {
+    alert(JSON.stringify(data, null, 2));
+  };
+  return <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <Box maxWidth={500}>
+          <FormInput {...args} control={methods.control} />
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
+        </Box>
+      </form>
+    </FormProvider>;
+}`,...p.parameters?.docs?.source}}};const N=["TextInput","SelectInput","RadioInput","CheckboxInput","TextareaInput","PhoneInputField","FileInput","PasswordInput","EmailInput","NumberInput","SwitchInput","MultiSelectInput"];export{a as CheckboxInput,l as EmailInput,u as FileInput,p as MultiSelectInput,d as NumberInput,i as PasswordInput,m as PhoneInputField,r as RadioInput,o as SelectInput,c as SwitchInput,e as TextInput,s as TextareaInput,N as __namedExportsOrder,w as default};
