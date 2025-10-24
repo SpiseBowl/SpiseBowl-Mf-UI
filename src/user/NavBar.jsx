@@ -119,7 +119,7 @@ function NavBar({ version = "0.0.0", openLogoutDialog, profileData = {} }) {
               <Tooltip title="User Settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
-                    src={`${VITE_APP_ASSETS_PATH}${profileData?.folderLocation}/${profileData?.photo}`}
+                    src={`${VITE_APP_ASSETS_PATH}/${profileData?.folderLocation}/${profileData?.profilePicture}`}
                     alt={`${profileData?.firstName} ${profileData?.lastName}`}
                     sx={{ cursor: "pointer" }}
                   />
