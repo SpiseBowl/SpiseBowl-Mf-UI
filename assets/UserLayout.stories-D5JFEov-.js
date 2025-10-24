@@ -1,4 +1,4 @@
-import{j as o}from"./jsx-runtime-D_zvdyIk.js";import{UserLayout as r}from"./__federation_expose_Layouts-B4MnEEz2.js";const n={title:"Layouts/UserLayout",component:r,tags:["autodocs"],parameters:{docs:{description:{component:`
+import{j as o}from"./jsx-runtime-D_zvdyIk.js";import{UserLayout as r}from"./__federation_expose_Layouts-SuhYVeNV.js";const n={title:"Layouts/UserLayout",component:r,tags:["autodocs"],parameters:{docs:{description:{component:`
 ### 📘 UserLayout
 Use this layout for all user pages. It includes header, sidebar, and main content area.
 

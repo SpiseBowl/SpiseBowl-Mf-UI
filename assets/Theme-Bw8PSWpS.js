@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as o}from"./index-DZADYc9D.js";import{M as i}from"./blocks-Df4RXYCY.js";function s(r){const n={code:"code",h1:"h1",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...o(),...r.components};return e.jsxs(e.Fragment,{children:[e.jsx(i,{title:"Theme/Theme"}),`
+import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as o}from"./index-DZADYc9D.js";import{M as i}from"./blocks-Cw21j_qS.js";function s(r){const n={code:"code",h1:"h1",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...o(),...r.components};return e.jsxs(e.Fragment,{children:[e.jsx(i,{title:"Theme/Theme"}),`
 `,e.jsx(n.h1,{id:"-theme-system-mui--context",children:"🎨 Theme System (MUI + Context)"}),`
 `,e.jsxs(n.p,{children:["Your app uses a custom MUI theme system with a ",e.jsx(n.code,{children:"ThemeContext"}),", ",e.jsx(n.code,{children:"ThemeProviderWrapper"}),", and utility functions to support both ",e.jsx(n.strong,{children:"light"})," and ",e.jsx(n.strong,{children:"dark"})," modes using a shared color palette."]}),`
 `,e.jsx(n.hr,{}),`

@@ -1,4 +1,4 @@
-import{importShared as t}from"./__federation_fn_import-CH-LSGom.js";import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{AdminLayout as n}from"./__federation_expose_Layouts-B4MnEEz2.js";await t("react");const s={title:"Layouts/AdminLayout",component:n,tags:["autodocs"],parameters:{docs:{description:{component:`
+import{importShared as t}from"./__federation_fn_import-CH-LSGom.js";import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{AdminLayout as n}from"./__federation_expose_Layouts-SuhYVeNV.js";await t("react");const s={title:"Layouts/AdminLayout",component:n,tags:["autodocs"],parameters:{docs:{description:{component:`
 ### 📘 AdminLayout
 Use this layout for all admin pages. It includes header, sidebar, and main content area.
 
