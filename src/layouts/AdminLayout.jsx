@@ -38,6 +38,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../theme/ThemeProviderWrapper";
 import { LOGO_1 } from "../assets";
 import { VITE_APP_ASSETS_PATH } from "../config/env";
+import LogoutDialog from "../sharedComp/dialogs/LogoutDialog";
 
 function AdminLayout({ children, version, profileData }) {
   // // initial state
