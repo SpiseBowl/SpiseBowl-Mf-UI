@@ -39,7 +39,7 @@ import { ThemeContext } from "../theme/ThemeProviderWrapper";
 import { LOGO_1 } from "../assets";
 import { VITE_APP_ASSETS_PATH } from "../config/env";
 
-function AdminLayout({ children, version, openLogoutDialog, profileData }) {
+function AdminLayout({ children, version, profileData }) {
   // // initial state
   const drawerWidth = 270;
   const theme = useTheme();
@@ -50,6 +50,7 @@ function AdminLayout({ children, version, openLogoutDialog, profileData }) {
   // // local setup
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [openLogoutModal, setOpenLogoutModal] = useState(false);
 
   const menuItems = [
     { text: "Dashboard", icon: <DashboardTwoTone />, path: "/" },
@@ -234,7 +235,7 @@ function AdminLayout({ children, version, openLogoutDialog, profileData }) {
               <MenuItem
                 onClick={() => {
                   handleCloseUserMenu();
-                  openLogoutDialog();
+                  setOpenLogoutModal(true);
                 }}
               >
                 <ListItemIcon>
@@ -291,6 +292,15 @@ function AdminLayout({ children, version, openLogoutDialog, profileData }) {
 
         {children}
       </Box>
+
+      <LogoutDialog
+        open={openLogoutModal}
+        onClose={() => setOpenLogoutModal(false)}
+        title="Ready to log out?"
+        description="You’ll be logged out of your account. Don’t worry, we’ll keep your session safe so you can log back in anytime."
+        confirmLabel="Yes, Log Me Out"
+        cancelLabel="Cancel"
+      />
     </>
   );
 }
@@ -298,7 +308,6 @@ function AdminLayout({ children, version, openLogoutDialog, profileData }) {
 AdminLayout.propTypes = {
   children: PropTypes.node.isRequired,
   version: PropTypes.string.isRequired || PropTypes.number.isRequired,
-  openLogoutDialog: PropTypes.func.isRequired,
   profileData: PropTypes.object.isRequired,
 };
 
