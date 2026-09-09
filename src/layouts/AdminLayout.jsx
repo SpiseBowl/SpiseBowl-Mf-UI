@@ -366,11 +366,18 @@ function AdminLayout({
       <Box
         component="main"
         sx={{
+          flexGrow: 1,
           ml: { md: `${drawerWidth}px` },
-          minWidth: {
+          width: {
             xs: "100%",
             md: `calc(100% - ${drawerWidth}px)`,
           },
+          maxWidth: {
+            xs: "100%",
+            md: `calc(100% - ${drawerWidth}px)`,
+          },
+          boxSizing: "border-box",
+          overflowX: "hidden",
           p: { xs: 2, sm: 3 },
         }}
       >
